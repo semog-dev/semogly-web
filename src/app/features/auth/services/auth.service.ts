@@ -10,4 +10,8 @@ export class AuthService {
   login(email: string, password: string) {
     return this.api.post('/api/account/login', { email, password });
   }
+
+  logout() {
+    return this.api.post('/api/account/logout', {});
+  }
 }
