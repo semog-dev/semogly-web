@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MessageService } from '../../../core/message/message.service';
 
 @Component({
@@ -9,9 +9,9 @@ import { MessageService } from '../../../core/message/message.service';
 })
 export class Toast {
   private readonly _messageService = inject(MessageService);
-  protected messages = this._messageService.getMessages();
+  messages = computed(() => this._messageService.messages());
 
   protected removeMessage(index: number) {
-    this._messageService.removeMessage(index);
+    this._messageService.remove(index);
   }
 }

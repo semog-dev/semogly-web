@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Message } from './message.model';
 import { MessageType } from './message-type.type';
@@ -7,32 +7,27 @@ import { MessageType } from './message-type.type';
   providedIn: 'root',
 })
 export class MessageService {
-  private readonly timeOutMs = 3000;
-  private messages = new BehaviorSubject<Message[]>([]);
+  private readonly defaultTimeout = 3000;
+  private readonly _messages = signal<Message[]>([]);
   private nextId = 1;
 
-  sendMessage(message: string, type: MessageType = 'info', timeOutMs: number = this.timeOutMs) {
+  readonly messages = this._messages.asReadonly();
+
+  send(text: string, type: MessageType = 'info', timeout = this.defaultTimeout) {
     const id = this.nextId++;
-    const newMessage: Message = {
-      id,
-      type,
-      message,
-    };
-    const current = this.messages.getValue();
 
-    this.messages.next([...current, newMessage]);
+    this._messages.update((messages) => [...messages, { id, type, message: text }]);
 
-    setTimeout(() => {
-      this.removeMessage(id);
-    }, timeOutMs);
+    if (timeout > 0) {
+      setTimeout(() => this.remove(id), timeout);
+    }
   }
 
-  getMessages() {
-    return this.messages.asObservable();
+  remove(id: number) {
+    this._messages.update((messages) => messages.filter((m) => m.id !== id));
   }
 
-  removeMessage(id: number) {
-    const messages = this.messages.getValue();
-    this.messages.next(messages.filter((m) => m.id !== id));
+  clear() {
+    this._messages.set([]);
   }
 }

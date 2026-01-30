@@ -1,4 +1,4 @@
-@for (message of messages | async; track message.id) {
+@for (message of messages(); track message.id) {
   <div class="toast-message {{ message.type }}" animate.leave="leaving">
     <mat-icon>
       {{

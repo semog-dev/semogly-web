@@ -8,6 +8,6 @@ export class AuthService {
   constructor(private api: ApiService) {}
 
   login(email: string, password: string) {
-    return this.api.post<{ token: string }>('/api/account/login', { email, password });
+    return this.api.post('/api/account/login', { email, password });
   }
 }
