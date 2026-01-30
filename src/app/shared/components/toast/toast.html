@@ -1,0 +1,21 @@
+@for (message of messages | async; track message.id) {
+  <div class="toast-message {{ message.type }}" animate.leave="leaving">
+    <mat-icon>
+      {{
+        message.type === 'success'
+          ? 'check_circle'
+          : message.type === 'error'
+            ? 'error'
+            : message.type === 'warning'
+              ? 'warning'
+              : 'info'
+      }}
+    </mat-icon>
+
+    <span>{{ message.message }}</span>
+
+    <button matIconButton (click)="removeMessage(message.id)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+}

@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { ApiService } from './services/api.service';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ApiService } from './api/api.service';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   providers: [
