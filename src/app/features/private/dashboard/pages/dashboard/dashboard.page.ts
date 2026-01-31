@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { BasePage } from '../../../../../core/base-page/base-page';
-import { AuthService } from '../../../../auth/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard.page',
@@ -17,7 +17,7 @@ export class DashboardPage extends BasePage {
     this._authService.logout().subscribe({
       next: () => {
         this.sendSuccess('Usuário deslogado com sucesso.');
-        window.location.reload();
+        // window.location.reload();
       },
       error: (err) => {
         this.sendError(err.error.message);
