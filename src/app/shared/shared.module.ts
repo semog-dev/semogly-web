@@ -1,18 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Toast } from './components/toast/toast';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { InputComponent } from './components/input/input';
 
 @NgModule({
-  declarations: [Toast],
+  declarations: [Toast, InputComponent],
   imports: [CommonModule, MatIconModule, MatButtonModule],
-  exports: [Toast],
+  exports: [Toast, InputComponent],
 })
-export class SharedModule {
-  constructor(@Optional() @SkipSelf() parent: SharedModule) {
-    if (parent) {
-      throw new Error('SharedModule já foi importado');
-    }
-  }
-}
+export class SharedModule {}

@@ -1,0 +1,19 @@
+<div
+  class="flex items-center gap-3 bg-gray-200 rounded-lg px-4 h-12 w-full transition focus-within:ring-2 focus-within:ring-blue-600"
+>
+  <!-- Ícone -->
+  <span *ngIf="icon" class="text-gray-500">
+    <i class="material-icons">{{ icon }}</i>
+  </span>
+
+  <!-- Input -->
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="handleInput($event)"
+    (blur)="handleBlur()"
+    class="w-full bg-transparent outline-none text-gray-700 placeholder-gray-400"
+  />
+</div>

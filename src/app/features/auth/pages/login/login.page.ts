@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { BasePage } from '../../../../core/base-page/base-page';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +15,20 @@ export class LoginPage extends BasePage {
   private readonly _route = inject(ActivatedRoute);
   private readonly _router = inject(Router);
 
-  login({ email, password }: { email: string; password: string }) {
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    super();
+    this.form = this.fb.group({
+      email: ['1', [Validators.required, Validators.email]],
+      password: ['1', Validators.required],
+    });
+  }
+
+  submit() {
+    if (this.form.invalid) return;
+
+    const { email, password } = this.form.value;
     this._authApiService.login(email, password).subscribe({
       next: () => {
         this.loginSuccess();
