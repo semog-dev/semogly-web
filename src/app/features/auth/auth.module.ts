@@ -10,9 +10,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../../shared/shared.module';
+import { SignUpPage } from './pages/signup/signup.page';
 
 @NgModule({
-  declarations: [LoginPage, LoginFormComponent],
+  declarations: [LoginPage, LoginFormComponent, SignUpPage],
   imports: [
     CommonModule,
     FormsModule,

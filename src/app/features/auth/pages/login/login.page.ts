@@ -20,8 +20,8 @@ export class LoginPage extends BasePage {
   constructor(private fb: FormBuilder) {
     super();
     this.form = this.fb.group({
-      email: ['1', [Validators.required, Validators.email]],
-      password: ['1', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
   }
 

@@ -7,4 +7,11 @@
       small-container-color: oklch(97.9% 0.021 166.113),
     )
   );
+  @include mat.button-overrides(
+    (
+      filled-container-color: oklch(59.6% 0.145 163.225),
+      outlined-label-text-color: white,
+      outlined-outline-color: white,
+    )
+  );
 }
