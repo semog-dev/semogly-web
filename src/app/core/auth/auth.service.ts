@@ -27,6 +27,11 @@ export class AuthService {
     this.auth$ = undefined;
   }
 
+  createAccount(name: string, lastname: string, email: string, password: string) {
+    return this.api.post('/api/account', { firstname: name, lastname, email, password });
+    // .pipe(tap(() => this.invalidateCache()));
+  }
+
   login(email: string, password: string) {
     return this.api
       .post('/api/account/login', { email, password })
