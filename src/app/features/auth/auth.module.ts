@@ -11,9 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../../shared/shared.module';
 import { SignUpPage } from './pages/signup/signup.page';
+import { AccountVerificationPage } from './pages/account-verification/account-verification.page';
 
 @NgModule({
-  declarations: [LoginPage, LoginFormComponent, SignUpPage],
+  declarations: [LoginPage, LoginFormComponent, SignUpPage, AccountVerificationPage],
   imports: [
     CommonModule,
     FormsModule,

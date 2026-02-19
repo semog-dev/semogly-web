@@ -46,4 +46,17 @@ export class AuthService {
       }),
     );
   }
+
+  accountVerification(publicId: string, verificationCode: string) {
+    return this.api
+      .post(`/api/account/${publicId}/verification`, {
+        verificationCode,
+      })
+      .pipe(
+        tap(() => {
+          this.invalidateCache();
+          this._router.navigate(['/auth/login']);
+        }),
+      );
+  }
 }

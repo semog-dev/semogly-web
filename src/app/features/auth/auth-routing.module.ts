@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPage } from './pages/login/login.page';
 import { SignUpPage } from './pages/signup/signup.page';
+import { AccountVerificationPage } from './pages/account-verification/account-verification.page';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPage,
+  },
+  {
+    path: 'account-verification/:publicid',
+    component: AccountVerificationPage,
   },
   {
     path: '',
