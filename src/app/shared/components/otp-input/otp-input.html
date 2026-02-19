@@ -1,0 +1,14 @@
+<div class="flex gap-4 justify-center items-center" (paste)="onPaste($event)">
+  @for (slot of slots(); track $index) {
+    <input
+      matInput
+      #otpInput
+      type="text"
+      maxLength="1"
+      autocomplete="one-time-code"
+      (keyup)="moveFocus($event, $index)"
+      (keydown)="handleBackspace($event, $index)"
+      class="bg-gray-200 w-10 h-10 text-2xl uppercase text-center rounded"
+    />
+  }
+</div>
