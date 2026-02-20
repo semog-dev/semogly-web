@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BasePage } from '../../../../core/base-page/base-page';
 import { AuthService } from '../../../../core/auth/auth.service';
+import { ErrorResponse } from '../../../../core/responses/error-response.type';
 
 @Component({
   selector: 'app-signup-page',
@@ -31,8 +32,8 @@ export class SignUpPage extends BasePage {
       next: () => {
         this.sendSuccess('Account created!');
       },
-      error: (err) => {
-        this.sendError(err.error.message);
+      error: (err: ErrorResponse) => {
+        this.sendError(err.message);
       },
     });
   }

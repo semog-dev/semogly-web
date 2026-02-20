@@ -3,6 +3,7 @@ import { BasePage } from '../../../../core/base-page/base-page';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ErrorResponse } from '../../../../core/responses/error-response.type';
 
 @Component({
   selector: 'app-account-verification-page',
@@ -35,7 +36,7 @@ export class AccountVerificationPage extends BasePage implements OnInit {
     const { verificationCode } = this.form.value;
     this._authService.accountVerification(this.publicid, verificationCode).subscribe({
       next: () => this.sendSuccess('Account verified as successful'),
-      error: () => this.sendError('Error'),
+      error: (err: ErrorResponse) => this.sendError(err.message),
     });
   }
 }

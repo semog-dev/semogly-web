@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { BasePage } from '../../../../../core/base-page/base-page';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../../core/auth/auth.service';
+import { ErrorResponse } from '../../../../../core/responses/error-response.type';
 
 @Component({
   selector: 'app-dashboard.page',
@@ -19,8 +20,8 @@ export class DashboardPage extends BasePage {
         this.sendSuccess('Usuário deslogado com sucesso.');
         // window.location.reload();
       },
-      error: (err) => {
-        this.sendError(err.error.message);
+      error: (err: ErrorResponse) => {
+        this.sendError(err.message);
       },
     });
   }

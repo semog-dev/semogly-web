@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { map, catchError, shareReplay, tap } from 'rxjs/operators';
 import { ApiService } from '../api/api.service';
 import { Router } from '@angular/router';
+import { isErrorResponse } from '../responses/error-response.type';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -28,14 +29,24 @@ export class AuthService {
   }
 
   createAccount(name: string, lastname: string, email: string, password: string) {
-    return this.api.post('/api/account', { firstname: name, lastname, email, password });
-    // .pipe(tap(() => this.invalidateCache()));
+    return this.api.post('/api/account', { firstname: name, lastname, email, password }).pipe(
+      catchError((err) => {
+        return isErrorResponse(err.error)
+          ? throwError(() => err.error)
+          : throwError(() => new Error('Erro ao criar account'));
+      }),
+    );
   }
 
   login(email: string, password: string) {
-    return this.api
-      .post('/api/account/login', { email, password })
-      .pipe(tap(() => this.invalidateCache()));
+    return this.api.post('/api/account/login', { email, password }).pipe(
+      tap(() => this.invalidateCache()),
+      catchError((err) => {
+        return isErrorResponse(err.error)
+          ? throwError(() => err.error)
+          : throwError(() => new Error('Erro ao fazer login'));
+      }),
+    );
   }
 
   logout() {
@@ -43,6 +54,11 @@ export class AuthService {
       tap(() => {
         this.invalidateCache();
         this._router.navigate(['/auth/login']);
+      }),
+      catchError((err) => {
+        return isErrorResponse(err.error)
+          ? throwError(() => err.error)
+          : throwError(() => new Error('Erro ao fazer logout'));
       }),
     );
   }
@@ -56,6 +72,11 @@ export class AuthService {
         tap(() => {
           this.invalidateCache();
           this._router.navigate(['/auth/login']);
+        }),
+        catchError((err) => {
+          return isErrorResponse(err.error)
+            ? throwError(() => err.error)
+            : throwError(() => new Error('Erro ao verificar account'));
         }),
       );
   }

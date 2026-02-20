@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { BasePage } from '../../../../core/base-page/base-page';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorResponse, isErrorResponse } from '../../../../core/responses/error-response.type';
 
 @Component({
   selector: 'app-login-page',
@@ -33,8 +34,8 @@ export class LoginPage extends BasePage {
       next: () => {
         this.loginSuccess();
       },
-      error: (err) => {
-        this.sendError(err.error.message);
+      error: (err: ErrorResponse) => {
+        this.sendError(err.message);
       },
     });
   }
