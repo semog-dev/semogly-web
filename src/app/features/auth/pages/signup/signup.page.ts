@@ -21,6 +21,7 @@ export class SignUpPage extends BasePage {
       lastname: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      passwordConfirmation: ['', Validators.required],
     });
   }
 
